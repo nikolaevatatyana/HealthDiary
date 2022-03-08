@@ -19,6 +19,15 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
         replaceFragment(ProfileFragment.newInstance())
     }
 
+    override fun goToChallengesFragment() {
+        replaceFragment(ChallengesFragment.newInstance())
+    }
+
+    override fun goToListsFragment() {
+
+        replaceFragment(ListsFragment.newInstance())
+    }
+
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager
             .beginTransaction()
@@ -36,4 +45,6 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
 interface INavigationFragment {
     fun goToMainFragment()
     fun goToProfileFragment()
+    fun goToChallengesFragment()
+    fun goToListsFragment()
 }

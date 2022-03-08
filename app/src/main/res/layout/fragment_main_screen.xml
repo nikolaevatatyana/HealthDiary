@@ -9,9 +9,10 @@
     <TextView
         android:id="@+id/txtDateTime"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:gravity="center"
         android:textSize="32sp"
+        android:textColor="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,8 +22,39 @@
         android:id="@+id/btnProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintTop_toBottomOf="@+id/txtDateTime"
         tools:text="Профиль" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnChallenges"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateTime"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:text="Challenges" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLists"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateTime"
+        tools:text="Lists" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPlus"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:background="@color/green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateTime"
+        tools:text="+" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

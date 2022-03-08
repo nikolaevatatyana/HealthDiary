@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MainScreenFragment : Fragment() {
 
@@ -42,18 +43,34 @@ class MainScreenFragment : Fragment() {
 
         profileBtn.setOnClickListener {
             listener?.goToProfileFragment()
+
+            val challengesBtn = view.findViewById<Button>(R.id.btnChallenges)
+
+            challengesBtn.text = "Challenges"
+
+            challengesBtn.setOnClickListener {
+                listener?.goToChallengesFragment()
+            }
+            val listsBtn = view.findViewById<Button>(R.id.btnLists)
+
+            listsBtn.text = "Lists"
+
+            listsBtn.setOnClickListener {
+                listener?.goToListsFragment()
+            }
+
+        }
+
+        fun getDateTime(): String {
+            /*var date = Date()
+            val formatter = SimpleDateFormat("MMM dd yyyy")
+            val answer: String = formatter.format(date)
+            return answer*/
+        }
+
+        companion object {
+
+            fun newInstance() = MainScreenFragment()
         }
 
     }
-
-    private fun getDateTime(): String{
-        //val date = Date()
-        return "22.03.2022"
-    }
-
-    companion object {
-
-        fun newInstance() = MainScreenFragment()
-                }
-
-}
