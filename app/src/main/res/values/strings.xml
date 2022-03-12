@@ -2,4 +2,9 @@
     <string name="app_name">HealthDiary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Профиль</string>
+    <string name="challenges">Challenges</string>
+    <string name="lists">Check lists</string>
+    <string name="login">Войти</string>
+    <string name="plus">+</string>
 </resources>

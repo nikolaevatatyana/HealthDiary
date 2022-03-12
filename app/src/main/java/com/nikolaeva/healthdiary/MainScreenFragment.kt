@@ -2,14 +2,16 @@ package com.nikolaeva.healthdiary
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainScreenFragment : Fragment() {
 
@@ -59,13 +61,27 @@ class MainScreenFragment : Fragment() {
                 listener?.goToListsFragment()
             }
 
-        }
+            val loginBtn = view.findViewById<Button>(R.id.btnLogin)
 
+            loginBtn.text = "Войти"
+
+            /*loginBtn.setOnClickListener {
+                val text = "Вход упешно выполнен"
+                val duration = Toast.LENGTH_SHORT
+
+                val toast = Toast.makeText(applicationContext, text, duration)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+
+            }*/
+
+        }
+    }
         fun getDateTime(): String {
-            /*var date = Date()
-            val formatter = SimpleDateFormat("MMM dd yyyy")
-            val answer: String = formatter.format(date)
-            return answer*/
+            val date = Date()
+            val formatter = SimpleDateFormat("dd.MM.yyyy")
+            val answer: String = formatter.format(date.time)
+            return answer
         }
 
         companion object {
