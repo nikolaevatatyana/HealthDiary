@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Профиль"
+        android:text="@string/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDateTime" />
@@ -48,33 +48,29 @@
         android:id="@+id/btnChallenges"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Challenges"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProfile"
-        android:layout_marginTop="300dp"
-        />
+        android:text="@string/challenges"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLists"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Lists"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProfile"
-        android:layout_marginTop="300dp"
-        />
+        android:text="@string/lists"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPlus"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@color/green"
-        android:text="+"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/plus"
+        app:layout_constraintBottom_toTopOf="@+id/btnLists"
+        app:layout_constraintEnd_toStartOf="@+id/btnLists"
+        app:layout_constraintStart_toEndOf="@+id/btnChallenges"
         app:layout_constraintTop_toBottomOf="@+id/btnProfile"
-        android:layout_marginTop="250dp"
-        />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

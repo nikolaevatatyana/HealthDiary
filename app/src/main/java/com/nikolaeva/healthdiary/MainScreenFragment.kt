@@ -19,7 +19,7 @@ class MainScreenFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is INavigationFragment){
+        if (context is INavigationFragment) {
             listener = context
         }
     }
@@ -41,52 +41,39 @@ class MainScreenFragment : Fragment() {
 
         val profileBtn = view.findViewById<Button>(R.id.btnProfile)
 
-        profileBtn.text = "Профиль"
+
 
         profileBtn.setOnClickListener {
             listener?.goToProfileFragment()
-
-            val challengesBtn = view.findViewById<Button>(R.id.btnChallenges)
-
-            challengesBtn.text = "Challenges"
-
-            challengesBtn.setOnClickListener {
-                listener?.goToChallengesFragment()
-            }
-            val listsBtn = view.findViewById<Button>(R.id.btnLists)
-
-            listsBtn.text = "Lists"
-
-            listsBtn.setOnClickListener {
-                listener?.goToListsFragment()
-            }
-
-            val loginBtn = view.findViewById<Button>(R.id.btnLogin)
-
-            loginBtn.text = "Войти"
-
-            /*loginBtn.setOnClickListener {
-                val text = "Вход упешно выполнен"
-                val duration = Toast.LENGTH_SHORT
-
-                val toast = Toast.makeText(applicationContext, text, duration)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-
-            }*/
-
         }
-    }
-        fun getDateTime(): String {
-            val date = Date()
-            val formatter = SimpleDateFormat("dd.MM.yyyy")
-            val answer: String = formatter.format(date.time)
-            return answer
+        val challengesBtn = view.findViewById<Button>(R.id.btnChallenges)
+
+
+
+        challengesBtn.setOnClickListener {
+            listener?.goToChallengesFragment()
+        }
+        val listsBtn = view.findViewById<Button>(R.id.btnLists)
+
+
+
+        listsBtn.setOnClickListener {
+            listener?.goToListsFragment()
         }
 
-        companion object {
-
-            fun newInstance() = MainScreenFragment()
-        }
 
     }
+
+    fun getDateTime(): String {
+        val date = Date()
+        val formatter = SimpleDateFormat("dd.MM.yyyy")
+        val answer: String = formatter.format(date.time)
+        return answer
+    }
+
+    companion object {
+
+        fun newInstance() = MainScreenFragment()
+    }
+
+}
