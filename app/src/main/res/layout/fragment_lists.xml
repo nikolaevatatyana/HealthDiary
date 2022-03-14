@@ -5,10 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".ListsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txtLists"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="?actionBarSize"
+        android:background="@color/green"
+        android:gravity="center"
+        android:text="@string/lists"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
+
+    <SearchView
+        android:id="@+id/brSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:background="@color/gray"
+        />
 
 </FrameLayout>
