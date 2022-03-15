@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var authUser: FirebaseAuth
+    //private lateinit var authUser: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +31,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+
         val loginBtn = view.findViewById<Button>(R.id.btnLogin)
 
         val email = view.findViewById<EditText>(R.id.et_email)
@@ -39,13 +42,13 @@ class ProfileFragment : Fragment() {
         // проверить на пустоту эти поля
 
 
-        authUser = FirebaseAuth.getInstance()
+        //authUser = FirebaseAuth.getInstance()
 
 
 
 
 
-        loginBtn.setOnClickListener {
+       /* loginBtn.setOnClickListener {
             //проверка на пустоту
             createUser(email = email.text.toString(), password = password.text.toString())
             val text = "Вход упешно выполнен"
@@ -55,10 +58,10 @@ class ProfileFragment : Fragment() {
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
 
-        }
+        }*/
     }
 
-    private fun createUser(email: String, password: String) {
+  /*  private fun createUser(email: String, password: String) {
         authUser.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
@@ -81,7 +84,7 @@ class ProfileFragment : Fragment() {
                     ).show()
                 }
             }
-    }
+    }*/
 
     /* fun viewInitializations() {
          etEmail = findViewById(R.id.et_email)

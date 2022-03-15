@@ -9,7 +9,7 @@
         android:id="@+id/txtLists"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/green"
+        android:background="@drawable/button_selector_green"
         android:gravity="center"
         android:text="@string/lists"
         android:textColor="@color/white"
