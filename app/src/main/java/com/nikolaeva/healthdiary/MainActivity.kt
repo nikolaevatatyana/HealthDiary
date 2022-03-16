@@ -1,5 +1,6 @@
 package com.nikolaeva.healthdiary
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +29,10 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
         replaceFragment(ListsFragment.newInstance())
     }
 
+    override fun gotToAuthActivity() {
+        startActivity(Intent(this, GoogleSignInActivity::class.java))
+    }
+
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager
             .beginTransaction()
@@ -47,4 +52,5 @@ interface INavigationFragment {
     fun goToProfileFragment()
     fun goToChallengesFragment()
     fun goToListsFragment()
+    fun gotToAuthActivity()
 }
