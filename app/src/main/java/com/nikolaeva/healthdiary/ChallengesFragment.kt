@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class ChallengesFragment : Fragment() {
@@ -23,25 +25,20 @@ class ChallengesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val arrayAdapter: ArrayAdapter<*>
+        val recyclerView: RecyclerView = view.findViewById(R.id.chList)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = CustomRecyclerAdapter(fillList())
+        recyclerView.adapter = CustomRecyclerAdapter(getCatList())
+    }
 
-        val users = arrayOf(
+    private fun fillList(): List<String> {
+        val data = mutableListOf<String>()
+        (0..30).forEach { i -> data.add("$i element") }
+        return data
+    }
 
-            "Challenge1", "Challenge2", "Challenge3",
-
-            "Challenge4", "Challenge5"
-
-        )
-
-        // доступ к listView из файла XML
-
-        var mListView = view.findViewById<ListView>(R.id.userList)
-
-        /*arrayAdapter = ArrayAdapter(this,
-
-            android.R.layout.simple_list_item_1, users)
-
-        mListView.adapter = arrayAdapter*/
+    private fun getCatList(): List<String> {
+        return this.resources.getStringArray(R.array.cat_names).toList()
     }
 
     companion object {

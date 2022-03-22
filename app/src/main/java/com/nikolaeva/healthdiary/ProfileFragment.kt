@@ -146,7 +146,7 @@ class ProfileFragment : Fragment() {
             loginBtn.text = "Выйти"
             nameUser.text = user.displayName
         } else {
-            nameUser.text = ""
+            nameUser.text = "Войдите в систему"
             loginBtn.text = "Войти"
         }
     }
