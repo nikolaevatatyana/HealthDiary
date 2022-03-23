@@ -1,18 +1,25 @@
 package com.nikolaeva.healthdiary
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nikolaeva.healthdiary.model.ChallengeModel
 
+class ChallengesFragment : Fragment(), ICustomRecyclerAdapter {
 
-class ChallengesFragment : Fragment() {
+    private var listener: INavigationFragment? = null
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is INavigationFragment) {
+            listener = context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,23 +34,29 @@ class ChallengesFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.chList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = CustomRecyclerAdapter(fillList())
-        recyclerView.adapter = CustomRecyclerAdapter(getCatList())
+        recyclerView.adapter = CustomRecyclerAdapter(this, getDataList())
     }
 
-    private fun fillList(): List<String> {
-        val data = mutableListOf<String>()
-        (0..30).forEach { i -> data.add("$i element") }
-        return data
+    private fun getDataList(): List<ChallengeModel> {
+        val data = resources.getStringArray(R.array.cat_names).toList()
+        val challengeModelList = mutableListOf<ChallengeModel>()
+        data.forEachIndexed { index, item ->
+            challengeModelList.add(
+                ChallengeModel(
+                    nameChallenge = item,
+                    countChallenge = index.toString()
+                )
+            )
+        }
+        return challengeModelList
     }
 
-    private fun getCatList(): List<String> {
-        return this.resources.getStringArray(R.array.cat_names).toList()
+    override fun itemClick(challengeModel: ChallengeModel) {
+        listener?.goToDetailChallengeFragment(challengeModel)
     }
 
     companion object {
 
         fun newInstance() = ChallengesFragment()
-
     }
 }

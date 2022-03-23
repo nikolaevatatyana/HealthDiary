@@ -5,9 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.nikolaeva.healthdiary.model.ChallengeModel
 
-class CustomRecyclerAdapter(private val names: List<String>) : RecyclerView
-.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+class CustomRecyclerAdapter(
+    private val listener: ICustomRecyclerAdapter,
+    private val challengeModels: List<ChallengeModel>
+) : RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val largeTextView: TextView = itemView.findViewById(R.id.textViewLarge)
@@ -21,9 +24,16 @@ class CustomRecyclerAdapter(private val names: List<String>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.largeTextView.text = names[position]
-        holder.smallTextView.text = "кот"
+        holder.largeTextView.text = challengeModels[position].nameChallenge
+        holder.smallTextView.text = challengeModels[position].countChallenge
+        holder.itemView.setOnClickListener {
+            listener.itemClick(challengeModels[position])
+        }
     }
 
-    override fun getItemCount() = names.size
+    override fun getItemCount() = challengeModels.size
+}
+
+interface ICustomRecyclerAdapter {
+    fun itemClick(challengeModel: ChallengeModel)
 }

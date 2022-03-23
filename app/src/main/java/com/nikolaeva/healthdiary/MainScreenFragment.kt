@@ -36,35 +36,31 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val dateTime = view.findViewById<TextView>(R.id.txtDateTime)
+        val profileBtn = view.findViewById<Button>(R.id.btnProfile)
+        val challengesBtn = view.findViewById<Button>(R.id.btnChallenges)
+        val listsBtn = view.findViewById<Button>(R.id.btnLists)
+        val plusBtn = view.findViewById<Button>(R.id.btnPlus)
 
         dateTime.text = getDateTime()
-
-        val profileBtn = view.findViewById<Button>(R.id.btnProfile)
-
-
 
         profileBtn.setOnClickListener {
             listener?.goToProfileFragment()
         }
-        val challengesBtn = view.findViewById<Button>(R.id.btnChallenges)
-
-
 
         challengesBtn.setOnClickListener {
             listener?.goToChallengesFragment()
         }
-        val listsBtn = view.findViewById<Button>(R.id.btnLists)
-
-
 
         listsBtn.setOnClickListener {
             listener?.goToListsFragment()
         }
 
-
+        plusBtn.setOnClickListener {
+            listener?.goToPlusFragment()
+        }
     }
 
-    fun getDateTime(): String {
+    private fun getDateTime(): String {
         val date = Date()
         val formatter = SimpleDateFormat("dd.MM.yyyy")
         val answer: String = formatter.format(date.time)
