@@ -38,7 +38,7 @@ class ChallengesFragment : Fragment(), ICustomRecyclerAdapter {
     }
 
     private fun getDataList(): List<ChallengeModel> {
-        val data = resources.getStringArray(R.array.cat_names).toList()
+        val data = resources.getStringArray(R.array.challenges).toList()
         val challengeModelList = mutableListOf<ChallengeModel>()
         data.forEachIndexed { index, item ->
             challengeModelList.add(

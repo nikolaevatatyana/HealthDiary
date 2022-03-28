@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.nikolaeva.healthdiary.model.ChallengeModel
+import com.nikolaeva.healthdiary.model.ListModel
 
 class MainActivity : AppCompatActivity(), INavigationFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +30,16 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
         addFragment(DetailChallengeFragment.newInstance(challengeModel), "detail")
     }
 
+    override fun goToDetailListFragment(listModel: ListModel) {
+        addFragment(DetailListFragment.newInstance(listModel), "detail")
+    }
+
     override fun goToListsFragment() {
         replaceFragment(ListsFragment.newInstance(), "list")
+    }
+
+    override fun gotToPlusFragment() {
+        replaceFragment(PlusFragment.newInstance(), "plus")
     }
 
     override fun gotToAuthActivity() {
@@ -38,7 +47,7 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
     }
 
     override fun goToPlusFragment() {
-        replaceFragment(PlusFragment.newInstance(), "plus")
+        TODO("Not yet implemented")  //зачем ему вторая?
     }
 
     private fun replaceFragment(fragment: Fragment, tag: String) {
@@ -70,7 +79,9 @@ interface INavigationFragment {
     fun goToProfileFragment()
     fun goToChallengesFragment()
     fun goToDetailChallengeFragment(challengeModel: ChallengeModel)
+    fun goToDetailListFragment(listModel: ListModel)
     fun goToListsFragment()
+    fun gotToPlusFragment()
     fun gotToAuthActivity()
     fun goToPlusFragment()
 }

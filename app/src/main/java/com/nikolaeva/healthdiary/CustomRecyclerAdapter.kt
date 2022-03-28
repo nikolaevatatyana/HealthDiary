@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nikolaeva.healthdiary.model.ChallengeModel
+import com.nikolaeva.healthdiary.model.ListModel
 
 class CustomRecyclerAdapter(
     private val listener: ICustomRecyclerAdapter,
     private val challengeModels: List<ChallengeModel>
+    private val listModels: List<ListModel>
 ) : RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,8 +28,12 @@ class CustomRecyclerAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.largeTextView.text = challengeModels[position].nameChallenge
         holder.smallTextView.text = challengeModels[position].countChallenge
+
+        holder.largeTextView.text = listModels[position].nameList
+        holder.smallTextView.text = listModels[position].countList
         holder.itemView.setOnClickListener {
             listener.itemClick(challengeModels[position])
+
         }
     }
 

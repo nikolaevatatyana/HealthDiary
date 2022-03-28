@@ -5,19 +5,30 @@
     <string name="lists">Check lists</string>
     <string name="login">Войти</string>
     <string name="plus">+</string>
-    <string-array name="cat_names">
-        <item>Рыжик</item>
-        <item>Барсик</item>
-        <item>Мурзик</item>
-        <item>Мурка</item>
-        <item>Васька</item>
-        <item>Томасина</item>
-        <item>Кристина</item>
-        <item>Пушок</item>
-        <item>Дымка</item>
-        <item>Кузя</item>
-        <item>Китти</item>
-        <item>Масяня</item>
-        <item>Симба</item>
+    <string name="create">Создать</string>
+    <string-array name="challenges">
+        <item>Бросаем курить</item>
+        <item>100 приседаний в день</item>
+        <item>100 прыжков каждое утро</item>
+        <item>Контрастный душ каждый день</item>
+        <item>Зарядка каждое утро</item>
+        <item>Йога каждый вечер</item>
+        <item>Медитации каждый вечер</item>
+        <item>Расстяжка 21 день подряд</item>
+        <item>Отказ от алкоголя 21 день</item>
+        <item>Позитивные мысли каждое утро</item>
     </string-array>
+    <string-array name="lists">
+        <item>Спортивный зал</item>
+        <item>Тренировка "спина"</item>
+        <item>Тренировка "руки"</item>
+        <item>Тренировка "ноги"</item>
+        <item>Тренировка "пресс"</item>
+        <item>Прием витаминов</item>
+        <item>Прием витамина D</item>
+        <item>Процедуры</item>
+        <item>Читмил</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
