@@ -39,6 +39,7 @@ class DetailListFragment : Fragment() {
         }
     }
 
+
     companion object {
 
         private const val DATA = "data"

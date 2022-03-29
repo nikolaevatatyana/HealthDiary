@@ -1,40 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".DetailListFragment">
+    tools:context=".ListsFragment">
 
     <TextView
-        android:id="@+id/nameList"
+        android:id="@+id/txtLists"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        tools:text="Прием витаминов" />
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/button_selector_green"
+        android:gravity="center"
+        android:text="Прием витаминов"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/dateList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
         android:textColor="@color/black"
         android:textSize="50sp"
-        tools:text="10 дней" />
-
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="394dp"
+        tools:text="не нужно" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/checkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="50dp"
+        android:background="@drawable/roundedbutton"
         android:gravity="center_horizontal"
         android:text="Отметить"
-        android:textColor="@color/black" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:selectedWeekBackgroundColor="#ff0000"
+        android:weekNumberColor="#0000ff"
+        android:weekSeparatorLineColor="#00ff00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLists" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
