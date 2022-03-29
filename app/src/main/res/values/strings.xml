@@ -6,6 +6,7 @@
     <string name="login">Войти</string>
     <string name="plus">+</string>
     <string name="create">Создать</string>
+
     <string-array name="challenges">
         <item>Бросаем курить</item>
         <item>100 приседаний в день</item>
@@ -18,6 +19,7 @@
         <item>Отказ от алкоголя 21 день</item>
         <item>Позитивные мысли каждое утро</item>
     </string-array>
+
     <string-array name="lists">
         <item>Спортивный зал</item>
         <item>Тренировка "спина"</item>
@@ -29,6 +31,4 @@
         <item>Процедуры</item>
         <item>Читмил</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

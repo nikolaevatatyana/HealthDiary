@@ -1,4 +1,4 @@
-package com.nikolaeva.healthdiary
+package com.nikolaeva.healthdiary.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.nikolaeva.healthdiary.R
 import com.nikolaeva.healthdiary.model.ChallengeModel
 
 class DetailChallengeFragment : Fragment() {
@@ -24,7 +25,7 @@ class DetailChallengeFragment : Fragment() {
 
         val data = arguments?.getSerializable(DATA) as ChallengeModel
 
-        val title = view.findViewById<TextView>(R.id.nameChallenge)
+        val title = view.findViewById<TextView>(R.id.txtNameChallenge)
         val count = view.findViewById<TextView>(R.id.countDays)
         val btnChallenge = view.findViewById<Button>(R.id.checkButton)
 

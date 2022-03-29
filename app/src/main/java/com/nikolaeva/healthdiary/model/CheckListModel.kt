@@ -2,7 +2,7 @@ package com.nikolaeva.healthdiary.model
 
 import java.io.Serializable
 
-class ListModel (
-    val nameList: String,
-    val countList: String
+class CheckListModel (
+    val name: String,
+    val count: String
 ) : Serializable

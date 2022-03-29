@@ -5,7 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.nikolaeva.healthdiary.model.ChallengeModel
-import com.nikolaeva.healthdiary.model.ListModel
+import com.nikolaeva.healthdiary.model.CheckListModel
+import com.nikolaeva.healthdiary.ui.fragments.ChallengesFragment
+import com.nikolaeva.healthdiary.ui.activities.GoogleSignInActivity
+import com.nikolaeva.healthdiary.ui.fragments.DetailChallengeFragment
+import com.nikolaeva.healthdiary.ui.fragments.DetailListFragment
+import com.nikolaeva.healthdiary.ui.fragments.ListsFragment
+import com.nikolaeva.healthdiary.ui.fragments.MainScreenFragment
+import com.nikolaeva.healthdiary.ui.fragments.PlusFragment
+import com.nikolaeva.healthdiary.ui.fragments.ProfileFragment
 
 class MainActivity : AppCompatActivity(), INavigationFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +38,8 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
         addFragment(DetailChallengeFragment.newInstance(challengeModel), "detail")
     }
 
-    override fun goToDetailListFragment(listModel: ListModel) {
-        addFragment(DetailListFragment.newInstance(listModel), "detail")
+    override fun goToDetailListFragment(checkListModel: CheckListModel) {
+        addFragment(DetailListFragment.newInstance(checkListModel), "detail")
     }
 
     override fun goToListsFragment() {
@@ -79,7 +87,7 @@ interface INavigationFragment {
     fun goToProfileFragment()
     fun goToChallengesFragment()
     fun goToDetailChallengeFragment(challengeModel: ChallengeModel)
-    fun goToDetailListFragment(listModel: ListModel)
+    fun goToDetailListFragment(checkListModel: CheckListModel)
     fun goToListsFragment()
     fun gotToPlusFragment()
     fun gotToAuthActivity()

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListsFragment">
-
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".ui.fragments.ListsFragment">
 
     <TextView
-        android:id="@+id/txtLists"
+        android:id="@+id/txtNameChallenge"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="4dp"
@@ -27,26 +28,29 @@
         android:id="@+id/countDays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:textColor="@color/black"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLists"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameChallenge"
         tools:text="10 дней" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/checkButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginHorizontal="16dp"
-        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/roundedbutton"
+        android:gravity="center"
         android:text="Отметить"
         android:textColor="@color/white"
-        android:background="@drawable/roundedbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countDays" />
+        app:layout_constraintTop_toBottomOf="@+id/countDays"
+        app:layout_constraintVertical_bias="0.51" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

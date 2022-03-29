@@ -1,4 +1,4 @@
-package com.nikolaeva.healthdiary
+package com.nikolaeva.healthdiary.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nikolaeva.healthdiary.ui.adapters.ChallengesAdapter
+import com.nikolaeva.healthdiary.ui.adapters.IChallengesAdapter
+import com.nikolaeva.healthdiary.INavigationFragment
+import com.nikolaeva.healthdiary.R
 import com.nikolaeva.healthdiary.model.ChallengeModel
-import com.nikolaeva.healthdiary.model.ListModel
 
-class ListsFragment : Fragment() {
+class ChallengesFragment : Fragment(), IChallengesAdapter {
 
     private var listener: INavigationFragment? = null
 
@@ -27,7 +30,7 @@ class ListsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lists, container, false)
+        return inflater.inflate(R.layout.fragment_challendes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,30 +38,29 @@ class ListsFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.chList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = CustomRecyclerAdapter(this, getDataList())
+        recyclerView.adapter = ChallengesAdapter(this, getDataList())
     }
 
-    private fun getDataList(): List<ListModel> {
-        val data = resources.getStringArray(R.array.lists).toList()
-        val listModelList = mutableListOf<ListModel>()
+    private fun getDataList(): List<ChallengeModel> {
+        val data = resources.getStringArray(R.array.challenges).toList()
+        val challengeModelList = mutableListOf<ChallengeModel>()
         data.forEachIndexed { index, item ->
-            listModelList.add(
-                ListModel(
-                    nameList = item,
-                    countList = index.toString()
+            challengeModelList.add(
+                ChallengeModel(
+                    nameChallenge = item,
+                    countChallenge = index.toString()
                 )
             )
         }
-        return listModelList
+        return challengeModelList
     }
 
-    fun itemClick(listModel: ListModel) {
-        listener?.goToDetailListFragment(listModel)
+    override fun itemClick(challengeModel: ChallengeModel) {
+        listener?.goToDetailChallengeFragment(challengeModel)
     }
 
     companion object {
 
-        fun newInstance() = ListsFragment()
-
+        fun newInstance() = ChallengesFragment()
     }
 }

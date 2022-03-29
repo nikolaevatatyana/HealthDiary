@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListsFragment">
+    tools:context=".ui.fragments.ListsFragment">
 
 
     <TextView
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtLists" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lList"
+        android:id="@+id/checkList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"

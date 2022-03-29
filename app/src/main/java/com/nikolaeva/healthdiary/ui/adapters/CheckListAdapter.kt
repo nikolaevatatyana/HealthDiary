@@ -1,18 +1,18 @@
-package com.nikolaeva.healthdiary
+package com.nikolaeva.healthdiary.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.nikolaeva.healthdiary.R
 import com.nikolaeva.healthdiary.model.ChallengeModel
-import com.nikolaeva.healthdiary.model.ListModel
+import com.nikolaeva.healthdiary.model.CheckListModel
 
-class CustomRecyclerAdapter(
-    private val listener: ICustomRecyclerAdapter,
+class ChallengesAdapter(
+    private val listener: IChallengesAdapter,
     private val challengeModels: List<ChallengeModel>
-    private val listModels: List<ListModel>
-) : RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<ChallengesAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val largeTextView: TextView = itemView.findViewById(R.id.textViewLarge)
@@ -29,8 +29,6 @@ class CustomRecyclerAdapter(
         holder.largeTextView.text = challengeModels[position].nameChallenge
         holder.smallTextView.text = challengeModels[position].countChallenge
 
-        holder.largeTextView.text = listModels[position].nameList
-        holder.smallTextView.text = listModels[position].countList
         holder.itemView.setOnClickListener {
             listener.itemClick(challengeModels[position])
 
@@ -40,6 +38,6 @@ class CustomRecyclerAdapter(
     override fun getItemCount() = challengeModels.size
 }
 
-interface ICustomRecyclerAdapter {
+interface IChallengesAdapter {
     fun itemClick(challengeModel: ChallengeModel)
 }

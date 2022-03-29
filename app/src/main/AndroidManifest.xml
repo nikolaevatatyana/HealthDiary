@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthDiary" >
         <activity
-            android:name=".GoogleSignInActivity"
+            android:name=".ui.activities.GoogleSignInActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
