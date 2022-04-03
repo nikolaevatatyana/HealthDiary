@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.fragments.ListsFragment">
 
 
@@ -12,20 +13,21 @@
         android:id="@+id/txtLists"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/button_selector_green"
+        android:background="@drawable/button_selector"
         android:gravity="center"
-        android:text="@string/challenges"
-        android:textColor="@color/white"
-        android:textSize="32sp"
+        android:text="@string/lists"
+        android:textColor="@color/green"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
         android:id="@+id/brSearch1"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@color/date"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLists" />
@@ -36,11 +38,11 @@
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/recyclerview_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brSearch1"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:listitem="@layout/recyclerview_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

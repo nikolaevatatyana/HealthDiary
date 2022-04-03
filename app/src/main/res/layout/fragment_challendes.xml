@@ -5,26 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.fragments.ChallengesFragment">
 
     <TextView
         android:id="@+id/txtChallenge"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/button_selector_green"
+        android:background="@drawable/button_selector"
         android:gravity="center"
         android:text="@string/challenges"
-        android:textColor="@color/white"
-        android:textSize="32sp"
+        android:textColor="@color/green"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
         android:id="@+id/brSearch"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:layout_marginTop="20dp"
+        android:background="@color/date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtChallenge" />
@@ -35,11 +37,10 @@
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/recyclerview_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brSearch"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:listitem="@layout/recyclerview_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

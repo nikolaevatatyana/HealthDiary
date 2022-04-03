@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/background"
     tools:context=".ui.fragments.ProfileFragment">
 
     <TextView
         android:id="@+id/txtHealthDiary"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@drawable/button_selector_green"
+        android:background="@drawable/button_selector"
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/green"
@@ -27,9 +27,12 @@
         android:background="@color/white"
         android:ems="10"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         android:textSize="25sp"
+        android:textColor="@color/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHealthDiary"
-        tools:layout_editor_absoluteX="-29dp"
         tools:text="Введите название" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -38,12 +41,34 @@
         android:layout_height="100dp"
         android:background="@drawable/roundedbutton"
         android:text="@string/create"
-        android:textColor="@color/white"
+        android:textColor="@color/green"
         android:textSize="14sp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintVertical_bias="0.85" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:text="Challenge"
+        app:layout_constraintEnd_toStartOf="@+id/switch2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlus" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="100dp"
+        android:text="CheckList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

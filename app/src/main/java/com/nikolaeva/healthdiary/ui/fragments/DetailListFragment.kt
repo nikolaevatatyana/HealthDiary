@@ -34,7 +34,9 @@ class DetailListFragment : Fragment() {
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             Toast.makeText(view.context, "$dayOfMonth/$month/$year", Toast.LENGTH_LONG).show()
+            
         }
+
 
         title.text = data.name
         var countInt = data.count.toInt()
