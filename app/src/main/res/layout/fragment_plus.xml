@@ -49,26 +49,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.85" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
-        android:text="Challenge"
-        app:layout_constraintEnd_toStartOf="@+id/switch2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPlus" />
-
-    <Switch
-        android:id="@+id/switch2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="100dp"
-        android:text="CheckList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPlus" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlus" >
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="@color/date"
+            android:text="Challenge" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_marginTop="50dp"
+            android:textSize="32sp"
+            android:textColor="@color/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Check List" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
