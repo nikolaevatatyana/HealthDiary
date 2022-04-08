@@ -9,14 +9,8 @@ import android.widget.Button
 import android.widget.CalendarView
 import android.widget.TextView
 import android.widget.Toast
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.ui.DayBinder
 import com.nikolaeva.healthdiary.R
-import com.nikolaeva.healthdiary.calendar.DayViewContainer
 import com.nikolaeva.healthdiary.model.CheckListModel
-import java.time.YearMonth
-import java.time.temporal.WeekFields
-import java.util.*
 
 class DetailListFragment : Fragment() {
 
@@ -35,29 +29,29 @@ class DetailListFragment : Fragment() {
 
         val title = view.findViewById<TextView>(R.id.txtNameList)
         val btnChallenge = view.findViewById<Button>(R.id.checkButton)
-        val calendarView = view.findViewById<com.kizitonwose.calendarview.CalendarView>(R.id.calendarView)
+        val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
 
 
-//        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-//            Toast.makeText(view.context, "$dayOfMonth/$month/$year", Toast.LENGTH_LONG).show()
-//        }
+       calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+           Toast.makeText(view.context, "$dayOfMonth/$month/$year", Toast.LENGTH_LONG).show()
+       }
 
-        val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(10)
-        val lastMonth = currentMonth.plusMonths(10)
-        val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
-        calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
-        calendarView.scrollToMonth(currentMonth)
-
-        calendarView.dayBinder = object : DayBinder<DayViewContainer> {
-            // Called only when a new container is needed.
-            override fun create(view: View) = DayViewContainer(view)
-
-            // Called every time we need to reuse a container.
-            override fun bind(container: DayViewContainer, day: CalendarDay) {
-                container.textView.text = day.date.dayOfMonth.toString()
-            }
-        }
+        // val currentMonth = YearMonth.now()
+        // val firstMonth = currentMonth.minusMonths(10)
+        // val lastMonth = currentMonth.plusMonths(10)
+        // val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
+        // calendarView.setup(firstMonth, lastMonth, firstDayOfWeek)
+        // calendarView.scrollToMonth(currentMonth)
+        //
+        // calendarView.dayBinder = object : DayBinder<DayViewContainer> {
+        //     // Called only when a new container is needed.
+        //     override fun create(view: View) = DayViewContainer(view)
+        //
+        //     // Called every time we need to reuse a container.
+        //     override fun bind(container: DayViewContainer, day: CalendarDay) {
+        //         container.textView.text = day.date.dayOfMonth.toString()
+        //     }
+        // }
 
 
         title.text = data.name

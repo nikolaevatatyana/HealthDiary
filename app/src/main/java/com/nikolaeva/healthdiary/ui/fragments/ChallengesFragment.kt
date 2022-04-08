@@ -8,15 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.ui.adapters.ChallengesAdapter
 import com.nikolaeva.healthdiary.ui.adapters.IChallengesAdapter
 import com.nikolaeva.healthdiary.INavigationFragment
 import com.nikolaeva.healthdiary.R
+import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
+import com.nikolaeva.healthdiary.repositories.UserRepository
 
 class ChallengesFragment : Fragment(), IChallengesAdapter {
 
     private var listener: INavigationFragment? = null
+    private val userRepository = UserRepository()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,7 +43,22 @@ class ChallengesFragment : Fragment(), IChallengesAdapter {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.chList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = ChallengesAdapter(this, getDataList())
+        val challenges = getDataList()
+
+        val userFirebase = createUserFirebase(challenges)
+        userRepository.addUser(userFirebase)
+
+        recyclerView.adapter = ChallengesAdapter(this, challenges)
+
+
+    }
+
+    private fun createUserFirebase(challenges: List<ChallengeModel>): UserFirebase {
+        return UserFirebase(
+            uid = Firebase.auth.currentUser?.uid.toString(),
+            name = Firebase.auth.currentUser?.displayName.toString(),
+            challenges = challenges
+        )
     }
 
     private fun getDataList(): List<ChallengeModel> {

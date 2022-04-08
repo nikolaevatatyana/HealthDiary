@@ -7,10 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.R
+import com.nikolaeva.healthdiary.db.FirebaseManager
+import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
+import com.nikolaeva.healthdiary.repositories.UserRepository
 
-class DetailChallengeFragment : Fragment() {
+class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
+
+    private val userRepository = UserRepository()
+    private lateinit var data: ChallengeModel
+    private lateinit var count: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,11 +32,13 @@ class DetailChallengeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data = arguments?.getSerializable(DATA) as ChallengeModel
+        data = arguments?.getSerializable(DATA) as ChallengeModel
 
         val title = view.findViewById<TextView>(R.id.txtNameChallenge)
-        val count = view.findViewById<TextView>(R.id.countDays)
+        count = view.findViewById<TextView>(R.id.countDays)
         val btnChallenge = view.findViewById<Button>(R.id.checkButton)
+
+        userRepository.getCurrentUser(this)
 
         title.text = data.nameChallenge
         count.text = data.countChallenge
@@ -48,5 +59,13 @@ class DetailChallengeFragment : Fragment() {
                     putSerializable(DATA, challengeModel)
                 }
             }
+    }
+
+    override fun readData(list: List<UserFirebase>) {
+        val currentUser = list.find { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
+        if (currentUser != null) {
+            val  currentChallenge = currentUser.challenges.find { challengeModel -> challengeModel.nameChallenge == data.nameChallenge  }
+            count.text = currentChallenge?.countChallenge
+        }
     }
 }
