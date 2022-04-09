@@ -8,13 +8,13 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.db.model.UserFirebase
+import com.nikolaeva.healthdiary.model.ChallengeModel
 
 class FirebaseManager {
     val db = Firebase.database.getReference(LIST_USER)
     val auth = Firebase.auth
 
     fun addUser(userFirebase: UserFirebase, finishListener: FinishWorkListener?) {
-
 
         if (auth.uid != null) db.child(auth.uid ?: "empty")
             .child(USER_NODE).setValue(userFirebase).addOnCompleteListener {
@@ -34,8 +34,27 @@ class FirebaseManager {
                 for (item in snapshot.children) {
                     var user: UserFirebase? = null
                     item.children.forEach {
-                        if (user == null)
-                            user = it.getValue(UserFirebase::class.java)
+                        if (user == null) {
+                            // user = it.getValue(UserFirebase::class.java)
+                            val name = it.child("name").value
+                            val uid = it.child("uid").value
+
+                            val list = arrayListOf<ChallengeModel>()
+                            it.child("challenges").children.forEach { challenge ->
+                                list.add(
+                                    ChallengeModel(
+                                        challenge.child("nameChallenge").value.toString(),
+                                        challenge.child("countChallenge").value.toString()
+                                    )
+                                )
+                            }
+
+                            user = UserFirebase(
+                                name = name.toString(),
+                                uid = uid.toString(),
+                                challenges = list
+                            )
+                        }
                     }
                     user?.let { listUsers.add(it) }
                 }

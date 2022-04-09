@@ -20,6 +20,7 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
     private val userRepository = UserRepository()
     private lateinit var data: ChallengeModel
     private lateinit var count: TextView
+    private var currentUser: UserFirebase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,19 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
         btnChallenge.setOnClickListener {
             countInt++
             count.text = countInt.toString()
+            val a = currentUser
+            if (a != null) {
+                val list = a.challenges
+                val modifierList = mutableListOf<ChallengeModel>()
+                list.forEach { item ->
+                    if (item.nameChallenge == data.nameChallenge) {
+                        modifierList.add(ChallengeModel(data.nameChallenge, countInt.toString()))
+                    } else {
+                        modifierList.add(item)
+                    }
+                }
+                userRepository.addUser(UserFirebase(a.uid, a.name, modifierList))
+            }
         }
     }
 
@@ -62,9 +76,9 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
     }
 
     override fun readData(list: List<UserFirebase>) {
-        val currentUser = list.find { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
+        currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
-            val  currentChallenge = currentUser.challenges.find { challengeModel -> challengeModel.nameChallenge == data.nameChallenge  }
+            val currentChallenge = currentUser!!.challenges.find { challengeModel -> challengeModel.nameChallenge == data.nameChallenge }
             count.text = currentChallenge?.countChallenge
         }
     }

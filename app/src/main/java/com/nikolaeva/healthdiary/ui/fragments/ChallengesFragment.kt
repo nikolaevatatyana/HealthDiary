@@ -14,14 +14,16 @@ import com.nikolaeva.healthdiary.ui.adapters.ChallengesAdapter
 import com.nikolaeva.healthdiary.ui.adapters.IChallengesAdapter
 import com.nikolaeva.healthdiary.INavigationFragment
 import com.nikolaeva.healthdiary.R
+import com.nikolaeva.healthdiary.db.FirebaseManager
 import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
 import com.nikolaeva.healthdiary.repositories.UserRepository
 
-class ChallengesFragment : Fragment(), IChallengesAdapter {
+class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadDataCallback {
 
     private var listener: INavigationFragment? = null
     private val userRepository = UserRepository()
+    private lateinit var recyclerView: RecyclerView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,16 +43,9 @@ class ChallengesFragment : Fragment(), IChallengesAdapter {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.chList)
+        recyclerView = view.findViewById(R.id.chList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val challenges = getDataList()
-
-        val userFirebase = createUserFirebase(challenges)
-        userRepository.addUser(userFirebase)
-
-        recyclerView.adapter = ChallengesAdapter(this, challenges)
-
-
+        userRepository.getCurrentUser(this)
     }
 
     private fun createUserFirebase(challenges: List<ChallengeModel>): UserFirebase {
@@ -68,7 +63,7 @@ class ChallengesFragment : Fragment(), IChallengesAdapter {
             challengeModelList.add(
                 ChallengeModel(
                     nameChallenge = item,
-                    countChallenge = index.toString()
+                    countChallenge = 0.toString()
                 )
             )
         }
@@ -82,5 +77,16 @@ class ChallengesFragment : Fragment(), IChallengesAdapter {
     companion object {
 
         fun newInstance() = ChallengesFragment()
+    }
+
+    override fun readData(list: List<UserFirebase>) {
+        val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
+        if (currentUser != null) {
+            recyclerView.adapter = ChallengesAdapter(this, currentUser.challenges)
+        } else {
+            val userFirebase = createUserFirebase(getDataList())
+            userRepository.addUser(userFirebase)
+            recyclerView.adapter = ChallengesAdapter(this, userFirebase.challenges)
+        }
     }
 }
