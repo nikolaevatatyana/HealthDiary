@@ -18,11 +18,12 @@ import com.nikolaeva.healthdiary.db.FirebaseManager
 import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
 import com.nikolaeva.healthdiary.repositories.UserRepository
+import com.nikolaeva.healthdiary.ui.adapters.CheckListAdapter
 
 class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadDataCallback {
 
     private var listener: INavigationFragment? = null
-    private val userRepository = UserRepository()
+    private val userRepository = UserRepository.getInstance()
     private lateinit var recyclerView: RecyclerView
 
     override fun onAttach(context: Context) {
@@ -46,14 +47,6 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
         recyclerView = view.findViewById(R.id.chList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         userRepository.getCurrentUser(this)
-    }
-
-    private fun createUserFirebase(challenges: List<ChallengeModel>): UserFirebase {
-        return UserFirebase(
-            uid = Firebase.auth.currentUser?.uid.toString(),
-            name = Firebase.auth.currentUser?.displayName.toString(),
-            challenges = challenges
-        )
     }
 
     private fun getDataList(): List<ChallengeModel> {
@@ -82,11 +75,17 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
     override fun readData(list: List<UserFirebase>) {
         val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
-            recyclerView.adapter = ChallengesAdapter(this, currentUser.challenges)
+            if (currentUser.challenges != null) {
+                recyclerView.adapter = ChallengesAdapter(this, currentUser.challenges)
+            } else {
+                val userFirebase = userRepository.createUserFirebase(challenges = getDataList())
+                userRepository.addUser(userFirebase)
+                userRepository.getCurrentUser(this)
+            }
         } else {
-            val userFirebase = createUserFirebase(getDataList())
+            val userFirebase = userRepository.createUserFirebase(challenges = getDataList())
             userRepository.addUser(userFirebase)
-            recyclerView.adapter = ChallengesAdapter(this, userFirebase.challenges)
+            recyclerView.adapter = ChallengesAdapter(this, getDataList())
         }
     }
 }

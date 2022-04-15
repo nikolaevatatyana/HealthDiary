@@ -9,6 +9,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
+import com.nikolaeva.healthdiary.model.CheckListModel
 
 class FirebaseManager {
     val db = Firebase.database.getReference(LIST_USER)
@@ -39,9 +40,9 @@ class FirebaseManager {
                             val name = it.child("name").value
                             val uid = it.child("uid").value
 
-                            val list = arrayListOf<ChallengeModel>()
+                            val listChallenges = arrayListOf<ChallengeModel>()
                             it.child("challenges").children.forEach { challenge ->
-                                list.add(
+                                listChallenges.add(
                                     ChallengeModel(
                                         challenge.child("nameChallenge").value.toString(),
                                         challenge.child("countChallenge").value.toString()
@@ -49,10 +50,29 @@ class FirebaseManager {
                                 )
                             }
 
+                            val listCheckLists = arrayListOf<CheckListModel>()
+                            it.child("checklist").children.forEach { checklist ->
+                                val date = mutableListOf<String>()
+                                checklist.child("listDate").children.forEach { dateItem ->
+                                    date.add(
+                                        dateItem.value.toString()
+                                    )
+                                }
+                                listCheckLists.add(
+                                    CheckListModel(
+                                        checklist.child("nameCheckList").value.toString(),
+                                        date
+                                    )
+                                )
+                            }
+
+
+
                             user = UserFirebase(
                                 name = name.toString(),
                                 uid = uid.toString(),
-                                challenges = list
+                                challenges = listChallenges,
+                                checkList = listCheckLists
                             )
                         }
                     }

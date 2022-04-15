@@ -17,7 +17,7 @@ import com.nikolaeva.healthdiary.repositories.UserRepository
 
 class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
 
-    private val userRepository = UserRepository()
+    private val userRepository = UserRepository.getInstance()
     private lateinit var data: ChallengeModel
     private lateinit var count: TextView
     private var currentUser: UserFirebase? = null
@@ -51,14 +51,14 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
             if (a != null) {
                 val list = a.challenges
                 val modifierList = mutableListOf<ChallengeModel>()
-                list.forEach { item ->
+                list?.forEach { item ->
                     if (item.nameChallenge == data.nameChallenge) {
                         modifierList.add(ChallengeModel(data.nameChallenge, countInt.toString()))
                     } else {
                         modifierList.add(item)
                     }
                 }
-                userRepository.addUser(UserFirebase(a.uid, a.name, modifierList))
+                userRepository.addUser(UserFirebase(a.uid, a.name, modifierList, a.checkList))
             }
         }
     }
@@ -78,7 +78,7 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
     override fun readData(list: List<UserFirebase>) {
         currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
-            val currentChallenge = currentUser!!.challenges.find { challengeModel -> challengeModel.nameChallenge == data.nameChallenge }
+            val currentChallenge = currentUser!!.challenges?.find { challengeModel -> challengeModel.nameChallenge == data.nameChallenge }
             count.text = currentChallenge?.countChallenge
         }
     }

@@ -54,11 +54,11 @@ class DetailListFragment : Fragment() {
         // }
 
 
-        title.text = data.name
-        var countInt = data.count.toInt()
-        btnChallenge.setOnClickListener {
-            countInt++
-        }
+        // title.text = data.name
+        // var countInt = data.count.toInt()
+        // btnChallenge.setOnClickListener {
+        //     countInt++
+        // }
     }
 
     companion object {

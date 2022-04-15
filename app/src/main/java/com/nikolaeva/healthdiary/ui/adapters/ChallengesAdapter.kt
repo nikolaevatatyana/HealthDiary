@@ -25,8 +25,8 @@ class CheckListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.name.text = checkListModel[position].name
-        holder.count.text = checkListModel[position].count
+        holder.name.text = checkListModel[position].nameCheckList
+        //holder.count.text = checkListModel[position].count
 
         holder.itemView.setOnClickListener {
             listener.itemClick(checkListModel[position])

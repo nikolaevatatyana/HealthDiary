@@ -8,15 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.INavigationFragment
 import com.nikolaeva.healthdiary.R
+import com.nikolaeva.healthdiary.db.FirebaseManager
+import com.nikolaeva.healthdiary.db.model.UserFirebase
+import com.nikolaeva.healthdiary.model.ChallengeModel
 import com.nikolaeva.healthdiary.model.CheckListModel
+import com.nikolaeva.healthdiary.repositories.UserRepository
+import com.nikolaeva.healthdiary.ui.adapters.ChallengesAdapter
 import com.nikolaeva.healthdiary.ui.adapters.CheckListAdapter
 import com.nikolaeva.healthdiary.ui.adapters.ICheckListAdapter
 
-class ListsFragment : Fragment(), ICheckListAdapter {
+class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCallback {
 
     private var listener: INavigationFragment? = null
+    private val userRepository = UserRepository.getInstance()
+    private lateinit var recyclerView: RecyclerView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,9 +45,9 @@ class ListsFragment : Fragment(), ICheckListAdapter {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.checkList)
+        recyclerView = view.findViewById(R.id.checkList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = CheckListAdapter(this, getDataList())
+        userRepository.getCurrentUser(this)
     }
 
     private fun getDataList(): List<CheckListModel> {
@@ -47,8 +56,8 @@ class ListsFragment : Fragment(), ICheckListAdapter {
         data.forEachIndexed { index, item ->
             listModelList.add(
                 CheckListModel(
-                    name = item,
-                    count = index.toString()
+                    nameCheckList = item,
+                    listDate = listOf("20.01.2021", "21.01.2021")
                 )
             )
         }
@@ -59,8 +68,24 @@ class ListsFragment : Fragment(), ICheckListAdapter {
         listener?.goToDetailListFragment(checkListModel)
     }
 
-    companion object {
+    override fun readData(list: List<UserFirebase>) {
+        val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
+        if (currentUser != null) {
+            if (currentUser.checkList != null) {
+                recyclerView.adapter = CheckListAdapter(this, currentUser.checkList)
+            } else {
+                val userFirebase = userRepository.createUserFirebase(checkList = getDataList())
+                userRepository.addUser(userFirebase)
+                userRepository.getCurrentUser(this)
+            }
+        } else {
+            val userFirebase = userRepository.createUserFirebase(checkList = getDataList())
+            userRepository.addUser(userFirebase)
+            recyclerView.adapter = CheckListAdapter(this, getDataList())
+        }
+    }
 
+    companion object {
         fun newInstance() = ListsFragment()
     }
 }
