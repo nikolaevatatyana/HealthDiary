@@ -16,7 +16,6 @@ class FirebaseManager {
     val auth = Firebase.auth
 
     fun addUser(userFirebase: UserFirebase, finishListener: FinishWorkListener?) {
-
         if (auth.uid != null) db.child(auth.uid ?: "empty")
             .child(USER_NODE).setValue(userFirebase).addOnCompleteListener {
                 finishListener?.onFinish()
@@ -51,7 +50,7 @@ class FirebaseManager {
                             }
 
                             val listCheckLists = arrayListOf<CheckListModel>()
-                            it.child("checklist").children.forEach { checklist ->
+                            it.child("checkList").children.forEach { checklist ->
                                 val date = mutableListOf<String>()
                                 checklist.child("listDate").children.forEach { dateItem ->
                                     date.add(

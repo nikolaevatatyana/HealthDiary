@@ -30,6 +30,12 @@ class UserRepository {
         }
     }
 
+    fun getLocalUser() = userFirebaseLocal
+
+    fun updateLocalUser(userFirebase: UserFirebase) {
+        userFirebaseLocal = userFirebase
+    }
+
     fun addUser(userFirebase: UserFirebase) {
         userFirebaseLocal = userFirebase
         return firebaseManager.addUser(userFirebase, null)

@@ -76,6 +76,7 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
         val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
             if (currentUser.challenges != null) {
+                userRepository.updateLocalUser(currentUser)
                 recyclerView.adapter = ChallengesAdapter(this, currentUser.challenges)
             } else {
                 val userFirebase = userRepository.createUserFirebase(challenges = getDataList())

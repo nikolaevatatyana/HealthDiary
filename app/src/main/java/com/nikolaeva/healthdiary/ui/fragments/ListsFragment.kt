@@ -72,6 +72,7 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
         val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
             if (currentUser.checkList != null) {
+                userRepository.updateLocalUser(currentUser)
                 recyclerView.adapter = CheckListAdapter(this, currentUser.checkList)
             } else {
                 val userFirebase = userRepository.createUserFirebase(checkList = getDataList())

@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
     }
 
     override fun goToPlusFragment() {
-        TODO("Not yet implemented")  //зачем ему вторая?
+
     }
 
     private fun replaceFragment(fragment: Fragment, tag: String) {
