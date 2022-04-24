@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNameChallenge"
-        tools:text="10 дней" />
+        tools:text="10" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/checkButton"
@@ -51,7 +51,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countDays"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDays" />
+
+    <TextView
+        android:id="@+id/txtDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="right"
+        android:text="days"
+        android:textColor="@color/date"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countDays" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

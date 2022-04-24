@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
         replaceFragment(ListsFragment.newInstance(), "list")
     }
 
-    override fun gotToPlusFragment() {
+    override fun goToPlusFragment() {
         replaceFragment(PlusFragment.newInstance(), "plus")
     }
 
@@ -54,9 +54,6 @@ class MainActivity : AppCompatActivity(), INavigationFragment {
         startActivity(Intent(this, GoogleSignInActivity::class.java))
     }
 
-    override fun goToPlusFragment() {
-
-    }
 
     private fun replaceFragment(fragment: Fragment, tag: String) {
         supportFragmentManager
@@ -89,7 +86,6 @@ interface INavigationFragment {
     fun goToDetailChallengeFragment(challengeModel: ChallengeModel)
     fun goToDetailListFragment(checkListModel: CheckListModel)
     fun goToListsFragment()
-    fun gotToPlusFragment()
-    fun gotToAuthActivity()
     fun goToPlusFragment()
+    fun gotToAuthActivity()
 }
