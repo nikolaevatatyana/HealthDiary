@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nikolaeva.healthdiary.R
+import com.nikolaeva.healthdiary.model.ChallengeModel
 import com.nikolaeva.healthdiary.model.CheckListModel
 
 class CheckListAdapter(
     private val listener: ICheckListAdapter,
-    private val checkListModel: List<CheckListModel>
+    private var checkListModel: List<CheckListModel>
 ) : RecyclerView.Adapter<CheckListAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,7 +37,11 @@ class CheckListAdapter(
 
     override fun getItemCount() = checkListModel.size
 
-
+    //to filter the list
+    fun filterList(checkListModels: List<CheckListModel>) {
+        this.checkListModel = checkListModel
+        notifyDataSetChanged()
+    }
 }
 
 interface ICheckListAdapter {

@@ -8,7 +8,6 @@
     android:background="@color/background"
     tools:context=".ui.fragments.ListsFragment">
 
-
     <TextView
         android:id="@+id/txtLists"
         android:layout_width="match_parent"
@@ -21,6 +20,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fake_search1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLists" />
 
     <SearchView
         android:id="@+id/brSearch1"
