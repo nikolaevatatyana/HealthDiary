@@ -20,59 +20,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtPlus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:ems="10"
-        android:gravity="center"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/white"
+        android:hint="@string/hint_in_plus_fragment"
+        android:textColor="@color/black"
         android:textSize="25sp"
-        android:textColor="@color/background"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHealthDiary"
         tools:text="Введите название" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnPlus1"
+        android:id="@+id/btn_create"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/roundedbutton"
         android:text="@string/create"
         android:textColor="@color/green"
         android:textSize="14sp"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.85" />
 
     <RadioGroup
-        android:layout_width="match_parent"
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPlus" >
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPlus"
+        app:layout_constraintStart_toStartOf="@+id/txtPlus"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlus">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radio_challenge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
+            android:text="Challenge"
             android:textColor="@color/date"
-            android:text="Challenge" />
+            android:textSize="32sp" />
 
         <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_marginTop="50dp"
-            android:textSize="32sp"
-            android:textColor="@color/date"
+            android:id="@+id/radio_checkList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Check List" />
+            android:text="Check List"
+            android:textColor="@color/date"
+            android:textSize="32sp" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

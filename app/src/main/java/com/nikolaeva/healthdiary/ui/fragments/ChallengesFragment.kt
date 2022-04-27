@@ -56,7 +56,7 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.chList)
-        searchView = view.findViewById(R.id.brSearch)
+        //searchView = view.findViewById(R.id.brSearch)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         challengeModels = getDataList()
         userRepository.getCurrentUser(this)
@@ -98,11 +98,6 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
         //     }
         // })
         // searchView.setOnClickListener {view ->  }
-
-
-
-
-
     }
 
     private fun getDataList(): List<ChallengeModel> {

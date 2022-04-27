@@ -6,6 +6,7 @@
     <string name="login">Войти</string>
     <string name="plus">+</string>
     <string name="create">Создать</string>
+    <string name="hint_in_plus_fragment">Введите название</string>
 
     <string-array name="challenges">
         <item>Бросаем курить</item>

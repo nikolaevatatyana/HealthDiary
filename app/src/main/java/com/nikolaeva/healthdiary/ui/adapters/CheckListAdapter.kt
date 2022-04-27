@@ -39,7 +39,7 @@ class CheckListAdapter(
 
     //to filter the list
     fun filterList(checkListModels: List<CheckListModel>) {
-        this.checkListModel = checkListModel
+        this.checkListModel = checkListModels
         notifyDataSetChanged()
     }
 }

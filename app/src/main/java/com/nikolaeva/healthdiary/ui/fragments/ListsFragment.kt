@@ -51,7 +51,7 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.checkList)
-        searchView = view.findViewById(R.id.brSearch1)
+        //searchView = view.findViewById(R.id.brSearch1)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         checkListModels = getDataList()
         userRepository.getCurrentUser(this)
@@ -62,10 +62,10 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
             afterTextChanged = {
                 filter(it.toString())
             },
-            onTextChanged = {s, start, before, count->
+            onTextChanged = { s, start, before, count ->
 
             },
-            beforeTextChanged = {s, start, before, count->
+            beforeTextChanged = { s, start, before, count ->
 
             }
         )
@@ -74,6 +74,7 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_menu, menu)
+    }
 
     private fun getDataList(): List<CheckListModel> {
         val data = resources.getStringArray(R.array.lists).toList()
@@ -89,12 +90,13 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
         return listModelList
     }
 
-        override fun itemClick(checkListModel: CheckListModel) {
+    override fun itemClick(checkListModel: CheckListModel) {
         listener?.goToDetailListFragment(checkListModel)
     }
-        companion object {
-            fun newInstance() = ListsFragment()
-        }
+
+    companion object {
+        fun newInstance() = ListsFragment()
+    }
 
     override fun readData(list: List<UserFirebase>) {
         val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
@@ -116,29 +118,27 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
         }
     }
 
+    private fun filter(text: String) {
+        //new array list that will hold the filtered data
+        val filterdNames: ArrayList<CheckListModel> = ArrayList()
 
-
-        private fun filter(text: String) {
-            //new array list that will hold the filtered data
-            val filterdNames: ArrayList<CheckListModel> = ArrayList()
-
-            //looping through existing elements
-            for (checkListModel in checkListModels) {
-                //if the existing elements contains the search input
-                if (checkListModel.nameCheckList.lowercase().contains(text.lowercase())) {
-                    //adding the element to filtered list
-                    filterdNames.add(checkListModel)
-                }
+        //looping through existing elements
+        for (checkListModel in checkListModels) {
+            //if the existing elements contains the search input
+            if (checkListModel.nameCheckList.lowercase().contains(text.lowercase())) {
+                //adding the element to filtered list
+                filterdNames.add(checkListModel)
             }
-
-            //calling a method of the adapter class and passing the filtered list
-            adapter.filterList(filterdNames)
         }
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            val id: Int = item.itemId
-            return if (id == R.id.action_search) {
-                true
-            } else super.onOptionsItemSelected(item)
-        }
+        //calling a method of the adapter class and passing the filtered list
+        adapter.filterList(filterdNames)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.itemId
+        return if (id == R.id.action_search) {
+            true
+        } else super.onOptionsItemSelected(item)
+    }
 }
