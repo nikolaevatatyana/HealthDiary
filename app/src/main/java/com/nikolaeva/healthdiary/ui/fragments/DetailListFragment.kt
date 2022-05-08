@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.nikolaeva.healthdiary.R
 import com.nikolaeva.healthdiary.db.FirebaseManager
 import com.nikolaeva.healthdiary.db.model.UserFirebase
+import com.nikolaeva.healthdiary.model.ChallengeModel
 import com.nikolaeva.healthdiary.model.CheckListModel
 import com.nikolaeva.healthdiary.repositories.UserRepository
 import java.text.SimpleDateFormat
@@ -23,6 +24,7 @@ class DetailListFragment : Fragment(), FirebaseManager.ReadDataCallback {
     private val userRepository = UserRepository.getInstance()
     private lateinit var txtDates: TextView
     private lateinit var title: TextView
+    private lateinit var data: CheckListModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,7 @@ class DetailListFragment : Fragment(), FirebaseManager.ReadDataCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data = arguments?.getSerializable(DATA) as CheckListModel
+        data = arguments?.getSerializable(DATA) as CheckListModel
 
         title = view.findViewById<TextView>(R.id.txtNameCheckList)
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
