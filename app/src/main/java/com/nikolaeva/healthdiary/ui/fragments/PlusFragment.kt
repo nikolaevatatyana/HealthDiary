@@ -17,6 +17,7 @@ import com.nikolaeva.healthdiary.R
 import com.nikolaeva.healthdiary.db.FirebaseManager
 import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
+import com.nikolaeva.healthdiary.model.CheckListModel
 import com.nikolaeva.healthdiary.repositories.UserRepository
 
 class PlusFragment : Fragment(), FirebaseManager.ReadDataCallback {
@@ -54,7 +55,7 @@ class PlusFragment : Fragment(), FirebaseManager.ReadDataCallback {
 
         createItem.setOnClickListener {
             if (isCheckList) {
-
+                addCheckList()
             } else {
                 addChallenge()
             }
@@ -68,6 +69,17 @@ class PlusFragment : Fragment(), FirebaseManager.ReadDataCallback {
         val newListChallenge = currentChallengeList?.plus(listOf(ChallengeModel(nameChallenge = editName.text.toString(), countChallenge = "0", "01.05.2022")))
         newListChallenge?.let {
             val userFirebase = userRepository.createUserFirebase(challenges = newListChallenge)
+            userRepository.addUser(userFirebase)
+            editName.text.clear()
+        }
+    }
+
+    private fun addCheckList() {
+        val currentUser = userRepository.getLocalUser()
+        val currentCheckList = currentUser?.checkList
+        val newListCheckList = currentCheckList?.plus(listOf(CheckListModel(nameCheckList = editName.text.toString(), listDate = listOf(""))))
+        newListCheckList?.let {
+            val userFirebase = userRepository.createUserFirebase(checkList = newListCheckList)
             userRepository.addUser(userFirebase)
             editName.text.clear()
         }
