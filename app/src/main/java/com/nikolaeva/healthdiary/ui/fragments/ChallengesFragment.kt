@@ -1,6 +1,5 @@
 package com.nikolaeva.healthdiary.ui.fragments
 
-import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.INavigationFragment
-import com.nikolaeva.healthdiary.MainActivity
 import com.nikolaeva.healthdiary.R
 import com.nikolaeva.healthdiary.db.FirebaseManager
 import com.nikolaeva.healthdiary.db.model.UserFirebase
@@ -107,7 +105,8 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
             challengeModelList.add(
                 ChallengeModel(
                     nameChallenge = item,
-                    countChallenge = 0.toString()
+                    countChallenge = 0.toString(),
+                    dateChallenge = "01.05.2022"
                 )
             )
         }

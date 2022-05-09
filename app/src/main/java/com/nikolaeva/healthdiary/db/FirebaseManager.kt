@@ -44,7 +44,8 @@ class FirebaseManager {
                                 listChallenges.add(
                                     ChallengeModel(
                                         challenge.child("nameChallenge").value.toString(),
-                                        challenge.child("countChallenge").value.toString()
+                                        challenge.child("countChallenge").value.toString(),
+                                        challenge.child("dateChallenge").value.toString()
                                     )
                                 )
                             }

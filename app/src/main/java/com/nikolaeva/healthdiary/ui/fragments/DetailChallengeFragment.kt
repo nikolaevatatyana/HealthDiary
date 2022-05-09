@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nikolaeva.healthdiary.R
@@ -14,6 +16,8 @@ import com.nikolaeva.healthdiary.db.FirebaseManager
 import com.nikolaeva.healthdiary.db.model.UserFirebase
 import com.nikolaeva.healthdiary.model.ChallengeModel
 import com.nikolaeva.healthdiary.repositories.UserRepository
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
 
@@ -21,6 +25,7 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
     private lateinit var data: ChallengeModel
     private lateinit var count: TextView
     private var currentUser: UserFirebase? = null
+    private lateinit var btnChallenge: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,13 +42,28 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
 
         val title = view.findViewById<TextView>(R.id.txtNameChallenge)
         count = view.findViewById<TextView>(R.id.countDays)
-        val btnChallenge = view.findViewById<Button>(R.id.checkButton)
+        btnChallenge = view.findViewById<Button>(R.id.checkButton)
+        val btnChallengeDelete = view.findViewById<Button>(R.id.btnChallengeDelete)
 
         userRepository.getCurrentUser(this)
 
         title.text = data.nameChallenge
         count.text = data.countChallenge
         var countInt = data.countChallenge.toInt()
+
+        //получить дату сегодня и сравнить с database
+        /*
+
+
+
+         */
+
+        val currentTime = getDateTime()
+        if (data.dateChallenge == currentTime) {
+            btnChallenge.isEnabled = false
+            btnChallenge.text = "ОТМЕЧЕНО"
+        }
+
         btnChallenge.setOnClickListener {
             countInt++
             count.text = countInt.toString()
@@ -53,14 +73,39 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
                 val modifierList = mutableListOf<ChallengeModel>()
                 list?.forEach { item ->
                     if (item.nameChallenge == data.nameChallenge) {
-                        modifierList.add(ChallengeModel(data.nameChallenge, countInt.toString()))
+                        modifierList.add(ChallengeModel(data.nameChallenge, countInt.toString(), currentTime))
                     } else {
                         modifierList.add(item)
                     }
                 }
                 userRepository.addUser(UserFirebase(a.uid, a.name, modifierList, a.checkList))
+                userRepository.getCurrentUser(this)
+                btnChallenge.isEnabled = false
+                btnChallenge.text = "ОТМЕЧЕНО"
             }
         }
+
+        btnChallengeDelete.setOnClickListener {
+            val user = currentUser
+            if (user != null) {
+                val list = user.challenges
+                val modifierList = mutableListOf<ChallengeModel>()
+                list?.forEach { item ->
+                    if (item.nameChallenge != data.nameChallenge) {
+                        modifierList.add(item)
+                    }
+                }
+                userRepository.addUser(UserFirebase(user.uid, user.name, modifierList, user.checkList))
+                userRepository.getCurrentUser(this)
+            }
+        }
+    }
+
+    private fun getDateTime(): String {
+        val date = Date()
+        val formatter = SimpleDateFormat("dd.MM.yyyy")
+        val answer: String = formatter.format(date.time)
+        return answer
     }
 
     companion object {
@@ -80,6 +125,15 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
         if (currentUser != null) {
             val currentChallenge = currentUser!!.challenges?.find { challengeModel -> challengeModel.nameChallenge == data.nameChallenge }
             count.text = currentChallenge?.countChallenge
+
+            val currentTime = getDateTime()
+            if (data.dateChallenge == currentTime) {
+                btnChallenge.isEnabled = false
+                btnChallenge.text = "ОТМЕЧЕНО"
+            }
+            if (currentChallenge == null) {
+                Toast.makeText(requireContext(), "Challenge deleted!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

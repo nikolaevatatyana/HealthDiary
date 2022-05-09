@@ -65,7 +65,7 @@ class PlusFragment : Fragment(), FirebaseManager.ReadDataCallback {
     private fun addChallenge() {
         val currentUser = userRepository.getLocalUser()
         val currentChallengeList = currentUser?.challenges
-        val newListChallenge = currentChallengeList?.plus(listOf(ChallengeModel(nameChallenge = editName.text.toString(), countChallenge = "0")))
+        val newListChallenge = currentChallengeList?.plus(listOf(ChallengeModel(nameChallenge = editName.text.toString(), countChallenge = "0", "01.05.2022")))
         newListChallenge?.let {
             val userFirebase = userRepository.createUserFirebase(challenges = newListChallenge)
             userRepository.addUser(userFirebase)
