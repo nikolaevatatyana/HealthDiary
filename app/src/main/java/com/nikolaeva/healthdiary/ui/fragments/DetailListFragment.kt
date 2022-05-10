@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CalendarView
 import android.widget.TextView
 import android.widget.Toast
@@ -25,6 +26,8 @@ class DetailListFragment : Fragment(), FirebaseManager.ReadDataCallback {
     private lateinit var txtDates: TextView
     private lateinit var title: TextView
     private lateinit var data: CheckListModel
+    private var currentUser: UserFirebase? = null
+    private lateinit var btnCheckListDelete: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,6 +96,20 @@ class DetailListFragment : Fragment(), FirebaseManager.ReadDataCallback {
         // btnChallenge.setOnClickListener {
         //     countInt++
         // }
+        btnCheckListDelete.setOnClickListener {
+            val user = currentUser
+            if (user != null) {
+                val list = user.checkList
+                val modifierList = mutableListOf<CheckListModel>()
+                list?.forEach { item ->
+                    if (item.nameCheckList != data.nameCheckList) {
+                        modifierList.add(item)
+                    }
+                }
+              //  userRepository.addUser(UserFirebase(user.uid, user.name, modifierList, user.checkList))
+                userRepository.getCurrentUser(this)
+            }
+        }
     }
 
     private fun showDates(data: CheckListModel) {

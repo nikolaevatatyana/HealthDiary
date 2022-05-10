@@ -34,7 +34,7 @@
         tools:text="20.01.2022" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/delete_CheckListButton"
+        android:id="@+id/btnCheckListDelete"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginHorizontal="16dp"
