@@ -125,7 +125,7 @@ class ChallengesFragment : Fragment(), IChallengesAdapter, FirebaseManager.ReadD
     override fun readData(list: List<UserFirebase>) {
         val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
-            if (currentUser.challenges != null) {
+            if (!currentUser.challenges.isNullOrEmpty()) {
                 userRepository.updateLocalUser(currentUser)
                 challengeModels = currentUser.challenges
                 adapter = ChallengesAdapter(this, challengeModels)

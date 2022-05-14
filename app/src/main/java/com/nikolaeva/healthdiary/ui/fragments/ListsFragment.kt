@@ -101,7 +101,7 @@ class ListsFragment : Fragment(), ICheckListAdapter, FirebaseManager.ReadDataCal
     override fun readData(list: List<UserFirebase>) {
         val currentUser = list.firstOrNull { userFirebase -> userFirebase.uid == Firebase.auth.currentUser?.uid }
         if (currentUser != null) {
-            if (currentUser.checkList != null) {
+            if (!currentUser.checkList.isNullOrEmpty()) {
                 userRepository.updateLocalUser(currentUser)
                 checkListModels = currentUser.checkList
                 adapter = CheckListAdapter(this, checkListModels)
