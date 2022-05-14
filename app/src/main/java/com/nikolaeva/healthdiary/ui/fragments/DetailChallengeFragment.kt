@@ -51,13 +51,6 @@ class DetailChallengeFragment : Fragment(), FirebaseManager.ReadDataCallback {
         count.text = data.countChallenge
         var countInt = data.countChallenge.toInt()
 
-        //получить дату сегодня и сравнить с database
-        /*
-
-
-
-         */
-
         val currentTime = getDateTime()
         if (data.dateChallenge == currentTime) {
             btnChallenge.isEnabled = false
