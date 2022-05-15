@@ -96,6 +96,8 @@ class DetailListFragment : Fragment(), FirebaseManager.ReadDataCallback {
         // btnChallenge.setOnClickListener {
         //     countInt++
         // }
+
+        btnCheckListDelete = view.findViewById(R.id.btnCheckListDelete);
         btnCheckListDelete.setOnClickListener {
             val user = currentUser
             if (user != null) {
